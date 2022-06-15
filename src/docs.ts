@@ -32,7 +32,7 @@ const bootstrap = async (app: INestApplication) => {
 
   // START
   await RedocModule.setup('docs', app, document, redocOptions);
-  await app.listen(3000);
+  await app.listen(3001);
 };
 
 /**
@@ -47,7 +47,7 @@ const start = async () => {
   await bootstrap(app);
 
   // GET JSON
-  const request = await axios.get('http://localhost:3000/docs/swagger.json');
+  const request = await axios.get('http://localhost:3001/docs/swagger.json');
   fs.writeFile('docs/swagger.json', JSON.stringify(request.data), (err) => {
     if (err) console.log(err);
 
