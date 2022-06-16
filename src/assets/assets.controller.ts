@@ -1,10 +1,15 @@
+// NEST
 import { Controller, Get, HttpStatus, Query, Res } from '@nestjs/common';
+
+// TYPES
 import { GetNFTAssetsResponseDTO } from 'src/alchemy/dto/getnftsresponse.dto';
 import { GetNftsResponse } from '@alch/alchemy-web3';
-import { AssetsService } from './assets.service';
 import { GetAssetsDTO } from './dto/assets.dto';
 import { ApiResponse } from '@nestjs/swagger';
 import { Response } from 'express';
+
+// SERVICES
+import { AssetsService } from './assets.service';
 
 @Controller('assets')
 export class AssetsController {

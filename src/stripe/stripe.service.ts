@@ -1,8 +1,12 @@
-import { Nft } from '@alch/alchemy-web3';
+// NEST
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PayAndPrintRequestDTO } from 'src/print/dto/payAndPrintRequest.dto';
 
+// TYPES
+import { PayAndPrintRequestDTO } from 'src/print/dto/payAndPrintRequest.dto';
+import { Nft } from '@alch/alchemy-web3';
+
+// SERVICES
+import { ConfigService } from '@nestjs/config';
 import Stripe from 'stripe';
 
 @Injectable()
@@ -13,9 +17,9 @@ export class StripeService {
   /**
    * If the stripe object is not defined, then create
    * a new stripe object using the stripe key from the config service
-   * @returns The stripe object
+   * @returns {Stripe} The stripe object
    */
-  getStripe() {
+  getStripe(): Stripe {
     const isDev: boolean = this.configService.get('DEV');
     this.stripe ??= new Stripe(
       this.configService.get(`STRIPE_${isDev ? 'DEV' : 'PROD'}`),
@@ -30,7 +34,7 @@ export class StripeService {
    * It creates a Stripe session for the user to pay for the NFT
    * @param {PayAndPrintRequestDTO} body - PayAndPrintRequestDTO
    * @param {Nft} currentNFT - Nft - This is the NFT that the user is trying to purchase.
-   * @returns A Stripe.Response<Stripe.Checkout.Session>
+   * @returns {Promise<Stripe.Response<Stripe.Checkout.Session>>} A Stripe.Response<Stripe.Checkout.Session>
    */
   async getSession(
     body: PayAndPrintRequestDTO,
@@ -49,16 +53,46 @@ export class StripeService {
               images: currentNFT.media?.map((media) => media.gateway) ?? [],
               name: currentNFT.title,
             },
-            unit_amount: 2000,
+            unit_amount:
+              +(this.configService.get('PRINT_SERVICE_PRICE') ?? '0') * 100,
           },
           quantity: 1,
         },
       ],
+      metadata: {
+        title: currentNFT.title,
+        description: currentNFT.description,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        url: currentNFT.media?.[0]?.gateway,
+      },
       mode: 'payment',
-      success_url: body.successURL,
-      cancel_url: body.cancelURL,
+      success_url: `${body.successURL}?sessionID={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${body.cancelURL}?sessionID={CHECKOUT_SESSION_ID}`,
     });
 
     return session;
+  }
+
+  /**
+   * It retrieves a session from Stripe
+   * @param {string} id - The id of the session you want to retrieve.
+   * @returns {Promise<Stripe.Checkout.Session>} A Stripe.Checkout.Session object.
+   */
+  async retrieveSession(id: string): Promise<Stripe.Checkout.Session> {
+    return await this.getStripe().checkout.sessions.retrieve(id);
+  }
+
+  /**
+   * "Retrieve a customer by ID."
+   * The first line of the function is the function signature. It's a combination of the function name,
+   * the parameters, and the return type
+   * @param {string} id - The ID of the customer to retrieve.
+   * @returns {Promise<Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>>} A promise that resolves to a Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>
+   */
+  async retrieveCustomer(
+    id: string,
+  ): Promise<Stripe.Response<Stripe.Customer | Stripe.DeletedCustomer>> {
+    return await this.getStripe().customers.retrieve(id);
   }
 }

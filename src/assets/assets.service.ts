@@ -1,7 +1,12 @@
-import { AlchemyService } from 'src/alchemy/alchemy.service';
-import { GetNftsResponse } from '@alch/alchemy-web3';
+// NEST
 import { Injectable } from '@nestjs/common';
+
+// TYPES
+import { GetNftsResponse } from '@alch/alchemy-web3';
 import { GetAssetsDTO } from './dto/assets.dto';
+
+// SERVICE
+import { AlchemyService } from 'src/alchemy/alchemy.service';
 
 @Injectable()
 export class AssetsService {
@@ -13,7 +18,7 @@ export class AssetsService {
    * returns an array of NFTs. It then returns that array of NFTs
    * @param {GetAssetsDTO} body - GetAssetsDTO - this is the body of the request. It's a class that
    * defines the parameters that are required for the request.
-   * @returns the nfts that are being returned from the alchemy service.
+   * @returns {Promise<GetNftsResponse>} the nfts that are being returned from the alchemy service.
    */
   async getAllAssets(body: GetAssetsDTO): Promise<GetNftsResponse> {
     try {

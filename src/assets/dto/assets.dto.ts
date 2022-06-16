@@ -6,7 +6,7 @@ export class GetAssetsDTO {
     required: true,
     maxLength: 42,
     minLength: 42,
-    description: 'The ETH address of the owner of the assets',
+    description: 'The ETH address of the owner of the assets.',
     example: '0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E',
   })
   @IsNotEmpty()

@@ -12,7 +12,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 class NftContractDTO implements NftContract {
   @ApiProperty({
-    description: 'address of NFT contract',
+    description: 'address of NFT contract.',
   })
   address: string;
 }
@@ -20,14 +20,14 @@ class NftContractDTO implements NftContract {
 class NftTokenMetadataDTO implements NftTokenMetadata {
   @ApiProperty({
     enum: ['ERC721', 'ERC1155'],
-    description: '"ERC721" or "ERC1155"',
+    description: '"ERC721" or "ERC1155".',
   })
   tokenType: 'erc721' | 'erc1155';
 }
 
 class TokenIDDTO implements NftId {
   @ApiProperty({
-    description: 'Id for NFT (hex)',
+    description: 'Id for NFT (hex).',
   })
   tokenId: string;
 
@@ -39,7 +39,7 @@ class TokenIDDTO implements NftId {
 
 class NftMetadataDTO implements NftMetadata {
   @ApiProperty({
-    description: 'Name of the NFT asset',
+    description: 'Name of the NFT asset.',
   })
   name?: string;
 
@@ -75,12 +75,12 @@ class TokenUriDTO implements TokenUri {
 
 class NFTAssetDTO implements Nft {
   @ApiProperty({
-    description: 'Name of the NFT asset',
+    description: 'Name of the NFT asset.',
   })
   title: string;
 
   @ApiProperty({
-    description: 'Brief human-readable description',
+    description: 'Brief human-readable description.',
   })
   description: string;
 
@@ -103,29 +103,29 @@ class NFTAssetDTO implements Nft {
   metadata?: NftMetadata;
 
   @ApiProperty({
-    description: 'Fetch time',
+    description: 'Fetch time.',
   })
   timeLastUpdated: string;
 
   @ApiProperty({
     description:
-      'A string describing a particular reason that we were unable to fetch complete metadata for the NFT. ',
+      'A string describing a particular reason that we were unable to fetch complete metadata for the NFT.',
   })
   error?: string;
 
   @ApiProperty({
-    description: 'Token balance',
+    description: 'Token balance.',
   })
   balance: string;
 
   @ApiProperty({
-    description: 'Token balance',
+    description: 'Token balance.',
     type: TokenIDDTO,
   })
   id: NftId;
 
   @ApiProperty({
-    description: 'Token balance',
+    description: 'Token balance.',
     type: NftContractDTO,
   })
   contract: NftContract;
@@ -133,19 +133,19 @@ class NFTAssetDTO implements Nft {
 
 export class GetNFTAssetsResponseDTO implements GetNftsResponse {
   @ApiProperty({
-    description: 'The list of NFTs',
+    description: 'The list of NFTs.',
     isArray: true,
     type: NFTAssetDTO,
   })
   ownedNfts: Nft[];
 
   @ApiProperty({
-    description: 'Include pagination key if exists',
+    description: 'Include pagination key if exists.',
   })
   pageKey?: string;
 
   @ApiProperty({
-    description: 'The total number of nfts list (differ from the NFTs length)',
+    description: 'The total number of nfts list (differ from the NFTs length).',
   })
   totalCount: number;
 }

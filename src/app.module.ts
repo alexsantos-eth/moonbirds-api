@@ -1,12 +1,19 @@
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// NEST
 import { Module } from '@nestjs/common';
-import { AssetsModule } from './assets/assets.module';
-import { ConfigModule } from '@nestjs/config';
+
+// SERVICES
+import { AppService } from './app.service';
+
+// MODULES
 import { AlchemyModule } from './alchemy/alchemy.module';
-import { PrintService } from './print/print.service';
-import { PrintModule } from './print/print.module';
+import { AssetsModule } from './assets/assets.module';
 import { StripeModule } from './stripe/stripe.module';
+import { PrintModule } from './print/print.module';
+import { EmailModule } from './email/email.module';
+import { ConfigModule } from '@nestjs/config';
+
+// CONTROLLERS
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -15,8 +22,9 @@ import { StripeModule } from './stripe/stripe.module';
     AlchemyModule,
     StripeModule,
     PrintModule,
+    EmailModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrintService],
+  providers: [AppService],
 })
 export class AppModule {}

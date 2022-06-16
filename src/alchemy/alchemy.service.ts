@@ -1,11 +1,16 @@
+// NEST
 import { Injectable } from '@nestjs/common';
+
+// TYPES
 import {
   AlchemyWeb3,
   createAlchemyWeb3,
   GetNftsResponse,
 } from '@alch/alchemy-web3';
-import { ConfigService } from '@nestjs/config';
 import { GetAssetsDTO } from 'src/assets/dto/assets.dto';
+
+// SERVICES
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AlchemyService {
@@ -14,9 +19,9 @@ export class AlchemyService {
 
   /**
    * It creates a new instance of AlchemyWeb3 if it doesn't exist.
-   * @returns The web3 instance for the NFT contract
+   * @returns {AlchemyWeb3} The web3 instance for the NFT contract
    */
-  getNFTWeb3() {
+  getNFTWeb3(): AlchemyWeb3 {
     const isDev: boolean = this.configService.get('DEV');
     this.nftWeb3 ??= createAlchemyWeb3(
       `https://eth-${
@@ -30,8 +35,8 @@ export class AlchemyService {
 
   /**
    * It gets all the NFTs owned by a specific address, and filters out any NFTs that don't have a title
-   * @param owner - The address of the user you want to get NFTs for.
-   * @returns An array of NFTs
+   * @param {GetAssetsDTO['address']} owner The address of the user you want to get NFTs for.
+   * @returns {Promise<GetNftsResponse>} An array of NFTs
    */
   async getNFTs(owner: GetAssetsDTO['address']): Promise<GetNftsResponse> {
     const nfts = await this.getNFTWeb3().alchemy.getNfts({
