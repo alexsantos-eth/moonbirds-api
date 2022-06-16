@@ -92,8 +92,8 @@ export class PrintService {
         template: 'paymentSummary',
         context: {
           ...session.metadata,
-          name: (customer as Stripe.Customer).name,
           date: new Date().toLocaleString(),
+          name: (customer as Stripe.Customer).name,
           email: (customer as Stripe.Customer).email,
           phone: (customer as Stripe.Customer).phone,
         },
