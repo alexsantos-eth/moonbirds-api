@@ -22,7 +22,7 @@ export class AlchemyService {
    * @returns {AlchemyWeb3} The web3 instance for the NFT contract
    */
   getNFTWeb3(): AlchemyWeb3 {
-    const isDev: boolean = this.configService.get('DEV');
+    const isDev: boolean = this.configService.get('DEV') === 'true';
     this.nftWeb3 ??= createAlchemyWeb3(
       `https://eth-${
         isDev ? 'rinkeby' : 'mainet'

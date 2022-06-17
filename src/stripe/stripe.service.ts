@@ -20,7 +20,7 @@ export class StripeService {
    * @returns {Stripe} The stripe object
    */
   getStripe(): Stripe {
-    const isDev: boolean = this.configService.get('DEV');
+    const isDev: boolean = this.configService.get('DEV') === 'true';
     this.stripe ??= new Stripe(
       this.configService.get(`STRIPE_${isDev ? 'DEV' : 'PROD'}`),
       {
