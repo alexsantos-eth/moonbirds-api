@@ -1,4 +1,4 @@
-import { bootstrap } from 'dist';
+import { bootstrap } from '../dist';
 
 let server;
 export const handler = async (event, context, callback) => {
