@@ -45,9 +45,11 @@ export async function bootstrap() {
 
   // DOCS API
   expressServer.use('/v1/docs', express.static(staticFolder));
+  expressServer.use('/functions/api');
 
   // INICAR
   // const app = await getApp();
   // await app.listen(4000);
   await getApp();
+  return expressServer;
 }
