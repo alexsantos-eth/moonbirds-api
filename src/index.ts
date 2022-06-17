@@ -47,6 +47,7 @@ export async function bootstrap() {
   expressServer.use('/v1/docs', express.static(staticFolder));
 
   // INICAR
-  const app = await getApp();
-  await app.listen(4000);
+  // const app = await getApp();
+  // await app.listen(4000);
+  await getApp();
 }

@@ -33,6 +33,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/serve-static": "^2.2.2",
     "@nestjs/swagger": "^5.2.0",
+    "@netlify/functions": "^1.0.0",
     "@types/jsdom": "^16.2.14",
     "@types/nodemailer": "^6.4.4",
     "axios": "^0.26.0",
