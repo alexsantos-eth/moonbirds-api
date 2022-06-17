@@ -1,8 +1,9 @@
 import { bootstrap } from '../dist';
-import serverless from 'serverless-http';
+import serverless from '@vendia/serverless-express';
 
 let server;
-export const handler = async () => {
+export const handler = async (event, context, callback) => {
   server = server ?? (await bootstrap());
-  return serverless(server);
+  const serverVendia = serverless({ app: server });
+  return serverVendia(event, context, callback);
 };
