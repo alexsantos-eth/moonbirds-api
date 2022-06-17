@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "env": {
+    "DEV": "true",
+
+    "ALCHEMY_API_KEY_DEV": "8EaE2M-ljdo3M5zfmI-e9F2WEPgjYzsy",
+    "ALCHEMY_API_KEY_PROD": "phrcK6tir701wHxcPYGLwA2Bt_JQidwO",
+    "STRIPE_DEV": "sk_test_4eC39HqLyjWDarjtT1zdp7dc",
+    "STRIPE_PROD": "sk_test_4eC39HqLyjWDarjtT1zdp7dc",
+
+    "OPENSEA_COLLECTION_ADDRESS": "0x9d7b1676de4d92f288c8b661a741535644270bd6",
+    "PRINT_SERVICE_PRICE": "20",
+
+    "MAIL_SERVICE": "gmail",
+    "MAIL_FROM": "alexdsantosv@gmail.com",
+    "MAIL_USER": "alexdsantosv@gmail.com",
+    "MAIL_PASSWORD": "drlzaxkclnwzrkuh"
+  },
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    }
+  ]
+}
