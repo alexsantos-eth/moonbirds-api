@@ -11,7 +11,6 @@ import { AppModule } from './app.module';
 // PIPES
 import { ValidationPipe } from '@nestjs/common';
 import { join, resolve } from 'path';
-import cors from 'cors';
 
 const expressServer = express();
 const staticFolder = resolve('.', 'docs');
@@ -45,24 +44,7 @@ export async function bootstrap() {
   });
 
   // DOCS API
-  const router = express.Router();
-  router.use(
-    cors({
-      allowedHeaders: [
-        'Origin',
-        'X-Requested-With',
-        'Content-Type',
-        'Accept',
-        'X-Access-Token',
-      ],
-      credentials: true,
-      methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-      origin: '*',
-      preflightContinue: false,
-    }),
-  );
   expressServer.use('/v1/docs', express.static(staticFolder));
-  expressServer.use('/functions/api', router);
 
   // INICAR
   // const app = await getApp();
