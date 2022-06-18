@@ -23,12 +23,13 @@ export class AlchemyService {
    */
   getNFTWeb3(): AlchemyWeb3 {
     const isDev: boolean = this.configService.get('DEV') === 'true';
+    const alchKey = this.configService.get(
+      `ALCHEMY_API_KEY_${isDev ? 'DEV' : 'PROD'}`,
+    );
     this.nftWeb3 ??= createAlchemyWeb3(
       `https://eth-${
-        isDev ? 'rinkeby' : 'mainet'
-      }.alchemyapi.io/nft/v2/${this.configService.get(
-        `ALCHEMY_API_KEY_${isDev ? 'DEV' : 'PROD'}`,
-      )}`,
+        isDev ? 'rinkeby' : 'mainnet'
+      }.alchemyapi.io/nft/v2/${alchKey}`,
     );
     return this.nftWeb3;
   }

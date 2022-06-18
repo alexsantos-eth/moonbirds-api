@@ -48,6 +48,7 @@ export async function bootstrap() {
 
   // INICAR
   const app = await getApp();
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(3000);
+
   return expressServer;
 }

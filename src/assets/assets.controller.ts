@@ -30,6 +30,7 @@ export class AssetsController {
       const list: GetNftsResponse = await this.service.getAllAssets(queryBody);
       res.status(HttpStatus.OK).json(list);
     } catch (err) {
+      console.log(err);
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     }
   }
