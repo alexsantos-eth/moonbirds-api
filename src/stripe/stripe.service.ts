@@ -47,11 +47,11 @@ export class StripeService {
           price_data: {
             currency: 'usd',
             product_data: {
-              description: currentNFT.description,
+              description: currentNFT.description || 'No description',
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               images: currentNFT.media?.map((media) => media.gateway) ?? [],
-              name: currentNFT.title,
+              name: currentNFT.title || 'No title',
             },
             unit_amount:
               +(this.configService.get('PRINT_SERVICE_PRICE') ?? '0') * 100,
