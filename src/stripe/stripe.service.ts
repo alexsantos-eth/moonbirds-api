@@ -59,6 +59,9 @@ export class StripeService {
           quantity: 1,
         },
       ],
+      shipping_address_collection: {
+        allowed_countries: ['US'],
+      },
       metadata: {
         title: currentNFT.title,
         description: currentNFT.description,
