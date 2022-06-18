@@ -57,6 +57,9 @@ export class StripeService {
           shipping_rate: this.configService.get('STRIPE_SHIPPING_ID'),
         },
       ],
+      shipping_address_collection: {
+        allowed_countries: ['US'],
+      },
       metadata: {
         title: currentNFT.title,
         description: currentNFT.description,
