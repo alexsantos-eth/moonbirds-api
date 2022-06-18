@@ -26,8 +26,8 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app/package*.json ./
 COPY --from=builder /usr/src/app/node_modules/ ./node_modules/
 COPY --from=builder /usr/src/app/dist/ ./dist/
-COPY --from=builder /usr/src/app/docs/ ./dist/
-COPY --from=builder /usr/src/app/templates/ ./dist/
+COPY --from=builder /usr/src/app/docs/ ./docs/
+COPY --from=builder /usr/src/app/templates/ ./templates/
 
 # Expose the web server's port.
 EXPOSE 3000
