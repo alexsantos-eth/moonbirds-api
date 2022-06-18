@@ -96,6 +96,7 @@ export class PrintService {
           name: (customer as Stripe.Customer).name,
           email: (customer as Stripe.Customer).email,
           phone: (customer as Stripe.Customer).phone,
+          address: (customer as Stripe.Customer).shipping.address,
         },
       });
 

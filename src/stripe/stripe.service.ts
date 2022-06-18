@@ -44,24 +44,18 @@ export class StripeService {
     const session = await this.getStripe().checkout.sessions.create({
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              description: currentNFT.description || 'No description',
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              images: currentNFT.media?.map((media) => media.gateway) ?? [],
-              name: currentNFT.title || 'No title',
-            },
-            unit_amount:
-              +(this.configService.get('PRINT_SERVICE_PRICE') ?? '0') * 100,
+          price: 'price_1LBjZPGsp0eeHrMwOgkWCP6i',
+          adjustable_quantity: {
+            enabled: true,
           },
-          quantity: 1,
+          tax_rates: ['txr_1LC5hNGsp0eeHrMwh7IeHsXm'],
         },
       ],
-      shipping_address_collection: {
-        allowed_countries: ['US'],
-      },
+      shipping_options: [
+        {
+          shipping_rate: 'shr_1LC5gJGsp0eeHrMwDsY78hGF',
+        },
+      ],
       metadata: {
         title: currentNFT.title,
         description: currentNFT.description,
