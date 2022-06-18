@@ -44,16 +44,17 @@ export class StripeService {
     const session = await this.getStripe().checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1LBjZPGsp0eeHrMwOgkWCP6i',
+          price: this.configService.get('STRIPE_PRICE_ID'),
           adjustable_quantity: {
             enabled: true,
           },
-          tax_rates: ['txr_1LC5hNGsp0eeHrMwh7IeHsXm'],
+          quantity: 1,
+          tax_rates: [this.configService.get('STRIPE_TAXES_ID')],
         },
       ],
       shipping_options: [
         {
-          shipping_rate: 'shr_1LC5gJGsp0eeHrMwDsY78hGF',
+          shipping_rate: this.configService.get('STRIPE_SHIPPING_ID'),
         },
       ],
       metadata: {

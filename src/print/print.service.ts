@@ -61,6 +61,7 @@ export class PrintService {
         url: session.url,
       };
     } catch (err) {
+      console.log(err);
       throw new Error(`Error in payment`);
     }
   }
